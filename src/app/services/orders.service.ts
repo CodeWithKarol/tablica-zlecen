@@ -25,6 +25,8 @@ export class OrdersService {
   readonly orders = computed(() => this.ordersSignal());
 
   constructor() {
+    console.log('Initializing Supabase with URL:', environment.supabaseUrl);
+    console.log('Supabase Key (masked):', environment.supabaseKey ? `${environment.supabaseKey.substring(0, 10)}...${environment.supabaseKey.substring(environment.supabaseKey.length - 5)}` : 'MISSING');
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
     this.fetchOrders();
     this.setupRealtimeSync();
