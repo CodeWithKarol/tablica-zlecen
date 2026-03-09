@@ -1,4 +1,6 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from '../../environments/environment';
 
 export type OrderStatus = 'new' | 'progress' | 'waiting' | 'done';
 
@@ -17,54 +19,84 @@ export interface Order {
   providedIn: 'root'
 })
 export class OrdersService {
-  private ordersSignal = signal<Order[]>([
-    {
-      id: '1',
-      customerName: 'Jan Kowalski',
-      carModel: 'Audi A4 B8',
-      licensePlate: 'WA 12345',
-      issueDescription: 'Wymiana rozrządu i pompy wody',
-      status: 'progress',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    {
-      id: '2',
-      customerName: 'Anna Nowak',
-      carModel: 'Toyota Corolla',
-      licensePlate: 'KR 56789',
-      issueDescription: 'Przegląd olejowy i filtry',
-      status: 'new',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
-  ]);
+  private supabase: SupabaseClient;
+  private ordersSignal = signal<Order[]>([]);
 
   readonly orders = computed(() => this.ordersSignal());
 
-  updateOrderStatus(orderId: string, newStatus: OrderStatus) {
-    this.ordersSignal.update(orders => 
-      orders.map(order => 
-        order.id === orderId 
-          ? { ...order, status: newStatus, updatedAt: new Date() } 
-          : order
-      )
-    );
-    this.triggerWebhook(orderId, newStatus);
+  constructor() {
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    this.fetchOrders();
+    this.setupRealtimeSync();
   }
 
-  private triggerWebhook(orderId: string, status: OrderStatus) {
-    // Placeholder for Task 4
-    console.log(`[Webhook] Order ${orderId} moved to ${status}`);
+  private async fetchOrders() {
+    const { data, error } = await this.supabase
+      .from('orders')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching orders:', error);
+      return;
+    }
+
+    if (data) {
+      this.ordersSignal.set(data.map(this.mapToOrder));
+    }
   }
 
-  addOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>) {
-    const newOrder: Order = {
-      ...order,
-      id: Math.random().toString(36).substring(2, 9),
-      createdAt: new Date(),
-      updatedAt: new Date()
+  private setupRealtimeSync() {
+    this.supabase
+      .channel('public:orders')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, () => {
+        this.fetchOrders();
+      })
+      .subscribe();
+  }
+
+  async updateOrderStatus(orderId: string, newStatus: OrderStatus) {
+    const { error } = await this.supabase
+      .from('orders')
+      .update({ 
+        status: newStatus, 
+        updated_at: new Date().toISOString() 
+      })
+      .eq('id', orderId);
+
+    if (error) {
+      console.error('Error updating order:', error);
+    }
+  }
+
+  async addOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>) {
+    const { error } = await this.supabase
+      .from('orders')
+      .insert([
+        {
+          customer_name: order.customerName,
+          car_model: order.carModel,
+          license_plate: order.licensePlate,
+          issue_description: order.issueDescription,
+          status: order.status
+        }
+      ]);
+
+    if (error) {
+      console.error('Error adding order:', error);
+    }
+  }
+
+  private mapToOrder(raw: any): Order {
+    return {
+      id: raw.id,
+      customerName: raw.customer_name,
+      carModel: raw.car_model,
+      licensePlate: raw.license_plate,
+      issueDescription: raw.issue_description,
+      status: raw.status as OrderStatus,
+      createdAt: new Date(raw.created_at),
+      updatedAt: new Date(raw.updated_at)
     };
-    this.ordersSignal.update(orders => [...orders, newOrder]);
   }
 }
