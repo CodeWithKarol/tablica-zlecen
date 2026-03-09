@@ -1,0 +1,38 @@
+<div class="flex h-screen bg-slate-50">
+  <!-- Sidebar -->
+  <aside class="w-72 bg-white border-r border-slate-200 flex flex-col">
+    <div class="p-8 border-b border-slate-100 mb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 bg-primary-600 rounded flex items-center justify-center font-bold text-white text-xs">TZ</div>
+        <span class="font-bold tracking-tight text-lg text-slate-900">Tablica Zleceń</span>
+      </div>
+    </div>
+    <nav class="flex-1 px-4 space-y-1">
+      <a routerLink="/app/board" routerLinkActive="bg-primary-50 text-primary-700 shadow-sm" class="flex items-center gap-3 py-3 px-4 rounded-xl font-bold text-slate-500 hover:bg-slate-50 transition-all group">
+        <span class="w-2 h-2 rounded-full bg-slate-300 group-[.active]:bg-primary-500"></span>
+        Tablica
+      </a>
+      <a routerLink="/app/settings" routerLinkActive="bg-primary-50 text-primary-700 shadow-sm" class="flex items-center gap-3 py-3 px-4 rounded-xl font-bold text-slate-500 hover:bg-slate-50 transition-all group">
+        <span class="w-2 h-2 rounded-full bg-slate-300 group-[.active]:bg-primary-500"></span>
+        Automatyzacja
+      </a>
+    </nav>
+    <div class="p-6 border-t border-slate-100 flex flex-col gap-4">
+      <a routerLink="/" class="text-xs font-bold text-slate-400 hover:text-slate-600 flex items-center gap-2">
+        ← Powrót na stronę
+      </a>
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-200"></div>
+        <div class="flex-1 min-w-0">
+          <p class="text-xs font-bold text-slate-900 truncate">Warsztat u Jana</p>
+          <p class="text-[10px] text-slate-400 font-medium">Plan: PRO</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 overflow-y-auto overflow-x-hidden p-10">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,335 @@
+<div class="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-primary-100 selection:text-primary-900">
+  <!-- Navigation -->
+  <nav class="sticky top-0 w-full z-50 flex items-center justify-between p-6 lg:px-12 bg-white/80 backdrop-blur-xl border-b border-slate-200">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 bg-primary-600 rounded flex items-center justify-center font-bold text-white text-sm">TZ</div>
+      <span class="font-bold tracking-tight text-xl text-slate-900">Tablica Zleceń</span>
+    </div>
+    <div class="hidden lg:flex gap-10 text-sm font-semibold text-slate-500">
+      <a href="#features" class="hover:text-primary-600 transition-colors">Funkcje</a>
+      <a href="#pricing" class="hover:text-primary-600 transition-colors">Cennik</a>
+      <a href="#faq" class="hover:text-primary-600 transition-colors">FAQ</a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a routerLink="/app" class="text-sm font-bold bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+        Uruchom aplikację
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold mb-8">
+          <span class="flex h-2 w-2 rounded-full bg-primary-500"></span>
+          Twój warsztat na autopilocie
+        </div>
+        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1] mb-8">
+          Zyskaj <span class="text-primary-600">2 godziny</span> spokoju każdego dnia
+        </h1>
+        <p class="text-lg lg:text-xl text-slate-500 leading-relaxed mb-10 max-w-xl font-medium">
+          Tablica, która sama pilnuje terminów. Koniec z dzwonieniem do klientów („kiedy gotowe?”). Zacznij zarabiać więcej w 5 minut.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a routerLink="/app" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary-500/20 transition-all text-center">
+            Uruchom darmowe demo
+          </a>
+          <a href="#demo" class="px-8 py-4 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 transition-all text-center flex items-center justify-center gap-2">
+            <span>▶</span> Zobacz jak to działa
+          </a>
+        </div>
+        <div class="mt-12 flex items-center gap-4">
+          <div class="flex -space-x-3">
+             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-200"></div>
+             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-300"></div>
+             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-400"></div>
+          </div>
+          <div class="text-sm">
+             <p class="font-bold text-slate-900 leading-none">Dla profesjonalistów</p>
+             <p class="text-slate-500 text-xs mt-1">zaufało nam już 50+ warsztatów</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative lg:-mr-24 scale-105">
+        <app-hero-board />
+      </div>
+    </div>
+  </header>
+
+  <!-- Pain/Solution Section -->
+  <section class="py-32 bg-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-2 gap-8">
+        <div class="p-12 rounded-3xl bg-slate-50 border border-slate-100">
+          <h2 class="text-red-600 font-bold uppercase tracking-wider text-xs mb-8">Każda minuta szukania kartki to Twoja strata</h2>
+          <ul class="space-y-6 text-lg text-slate-600">
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-2 h-2 rounded-full bg-red-400"></span>
+              Mechanicy przerywają pracę, bo nie wiedzą co dalej
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-2 h-2 rounded-full bg-red-400"></span>
+              Telefon dzwoni co 15 minut z pytaniem o status
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-2 h-2 rounded-full bg-red-400"></span>
+              Części leżą na półce, a Ty zapomniałeś o nich na fakturze
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-2 h-2 rounded-full bg-red-400"></span>
+              Bałagan w notatkach powoduje błędy i reklamacje
+            </li>
+          </ul>
+        </div>
+        <div class="p-12 rounded-3xl bg-primary-50 border border-primary-100">
+          <h2 class="text-primary-700 font-bold uppercase tracking-wider text-xs mb-8">Tablica Zleceń: Twój mechanizm zysku</h2>
+          <ul class="space-y-6 text-lg text-slate-900 font-semibold">
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-6 h-6 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-bold">✓</span>
+              Jeden rzut oka i wiesz, kto zarabia, a kto stoi
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-6 h-6 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-bold">✓</span>
+              Auto-SMS informuje klienta, gdy samochód jest gotowy
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-6 h-6 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-bold">✓</span>
+              Każda śrubka i litr oleju trafiają na listę części
+            </li>
+            <li class="flex items-center gap-4">
+              <span class="flex-none w-6 h-6 rounded-full bg-primary-600 text-white flex items-center justify-center text-xs font-bold">✓</span>
+              Rozliczenie zlecenia i PDF w 2 sekundy
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it Works Section -->
+  <section id="process" class="py-32 bg-slate-50 border-y border-slate-200">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">3 Proste kroki do porządku w warsztacie</h2>
+        <p class="text-slate-500 font-medium">Uruchomienie systemu trwa krócej niż wymiana żarówki.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-12 text-center">
+        <div class="relative">
+          <div class="text-6xl font-black text-primary-100 absolute -top-10 left-1/2 -translate-x-1/2 z-0 opacity-50">01</div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Szybka konfiguracja</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Wpisujesz dane warsztatu i definiujesz swoje kolumny (np. "Diagnostyka", "Czekam na części").</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="text-6xl font-black text-primary-100 absolute -top-10 left-1/2 -translate-x-1/2 z-0 opacity-50">02</div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Dodaj pierwsze zlecenie</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Wpisz numer rejestracyjny i telefon klienta. Wszystko w 30 sekund prosto z telefonu.</p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="text-6xl font-black text-primary-100 absolute -top-10 left-1/2 -translate-x-1/2 z-0 opacity-50">03</div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Odzyskaj czas</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Przesuwaj zlecenia, a system sam wyśle SMS-y do klientów i przygotuje rozliczenie PDF.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section id="features" class="py-32 bg-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:border-primary-500 hover:shadow-xl hover:shadow-primary-600/5 transition-all">
+          <div class="w-12 h-12 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-6 text-xl">⚡</div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Święty spokój</h3>
+          <p class="text-slate-500 text-sm leading-relaxed font-medium">System sam wyśle powiadomienia. Ty skupiasz się na zarządzaniu i rozwoju.</p>
+        </div>
+        <div class="p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:border-primary-500 hover:shadow-xl hover:shadow-primary-600/5 transition-all">
+          <div class="w-12 h-12 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-6 text-xl">💰</div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Eliminacja strat</h3>
+          <p class="text-slate-500 text-sm leading-relaxed font-medium">Nie tracisz czasu na szukanie kluczyków czy papierów. Wszystko jest na tablicy.</p>
+        </div>
+        <div class="p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:border-primary-500 hover:shadow-xl hover:shadow-primary-600/5 transition-all">
+          <div class="w-12 h-12 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-6 text-xl">🏗️</div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Skaluj warsztat</h3>
+          <p class="text-slate-500 text-sm leading-relaxed font-medium">Wyraźny obraz pracy zespołu pozwala Ci przyjmować więcej zleceń bez stresu.</p>
+        </div>
+        <div class="p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:border-primary-500 hover:shadow-xl hover:shadow-primary-600/5 transition-all">
+          <div class="w-12 h-12 bg-primary-100 text-primary-700 rounded-lg flex items-center justify-center mb-6 text-xl">📄</div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Błyskawiczne PDF</h3>
+          <p class="text-slate-500 text-sm leading-relaxed font-medium">Profesjonalne dokumenty dla klienta gotowe w 3 kliknięcia. Wyglądasz jak lider rynku.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="py-32 bg-white overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between italic">
+          <p class="text-slate-600 mb-8 font-medium">"Odzyskałem 2 godziny dziennie na to, co ważne - na bycie z rodziną, a nie siedzenie w papierach."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-200"></div>
+            <div>
+              <p class="text-sm font-bold text-slate-900">Mariusz, Bosch Service</p>
+              <p class="text-xs text-slate-400">Właściciel warsztatu</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between italic">
+          <p class="text-slate-600 mb-8 font-medium">"Klienci są zachwyceni powiadomieniami SMS. Wyglądamy na znacznie większy i bardziej profesjonalny serwis."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-200"></div>
+            <div>
+              <p class="text-sm font-bold text-slate-900">Paweł, Auto-Expert</p>
+              <p class="text-xs text-slate-400">Kierownik serwisu</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100 flex flex-col justify-between italic">
+          <p class="text-slate-600 mb-8 font-medium">"Koniec z szukaniem kartek po całym warsztacie. Teraz każdy mechanik wie dokładnie, co ma robić w danej chwili."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-primary-200"></div>
+            <div>
+              <p class="text-sm font-bold text-slate-900">Tomek, Serwis AC</p>
+              <p class="text-xs text-slate-400">Specjalista</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-32 bg-white">
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="text-center max-w-2xl mx-auto mb-20">
+        <h2 class="text-4xl font-bold mb-6 text-slate-900">Bezlitosna efektywność w dobrej cenie</h2>
+        <p class="text-slate-500 font-medium">Zacznij od zera, płać tylko gdy Twój warsztat zacznie zarabiać więcej.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Free -->
+        <div class="p-10 bg-slate-50 rounded-3xl border border-slate-200 flex flex-col shadow-sm">
+          <h3 class="text-xl font-bold mb-1 text-slate-900">Dla startu</h3>
+          <div class="flex items-baseline gap-1 mb-8 text-slate-900">
+            <span class="text-4xl font-bold">0 zł</span>
+          </div>
+          <ul class="space-y-4 text-sm text-slate-500 mb-10 flex-1">
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Do 10 aut dziennie</li>
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Podstawowa tablica</li>
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Magazyn części</li>
+          </ul>
+          <a routerLink="/app" class="w-full py-4 text-center border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-white transition-all">Rozpocznij</a>
+        </div>
+        <!-- PRO -->
+        <div class="p-10 bg-white rounded-3xl border-2 border-primary-600 shadow-xl relative flex flex-col transform lg:scale-105">
+          <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary-600 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Najlepszy zwrot z inwestycji</div>
+          <h3 class="text-xl font-bold mb-1 text-slate-900">WARSZTAT PRO</h3>
+          <div class="flex items-baseline gap-1 mb-8 text-slate-900">
+            <span class="text-4xl font-bold">49 zł</span>
+            <span class="text-slate-400 text-sm">/mc</span>
+          </div>
+          <ul class="space-y-4 text-sm mb-10 flex-1">
+            <li class="flex items-center gap-2 font-bold text-slate-900"><span class="text-primary-600">✓</span> Nielimitowane zlecenia</li>
+            <li class="flex items-center gap-2 font-bold text-slate-900"><span class="text-primary-600">✓</span> Pełny automat SMS</li>
+            <li class="flex items-center gap-2 font-bold text-slate-900"><span class="text-primary-600">✓</span> Integracje (Make/n8n)</li>
+          </ul>
+          <a routerLink="/app" class="w-full py-4 text-center bg-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary-500/20 hover:bg-primary-700 transition-all">Wybierz PRO</a>
+        </div>
+        <!-- PREMIUM -->
+        <div class="p-10 bg-slate-50 rounded-3xl border border-slate-200 flex flex-col shadow-sm">
+          <h3 class="text-xl font-bold mb-1 text-slate-900">SIECI / FLOTY</h3>
+          <div class="flex items-baseline gap-1 mb-8 text-slate-900">
+            <span class="text-4xl font-bold">99 zł</span>
+            <span class="text-slate-400 text-sm">/mc</span>
+          </div>
+          <ul class="space-y-4 text-sm text-slate-500 mb-10 flex-1">
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Wielu pracowników</li>
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Raporty wydajności</li>
+            <li class="flex items-center gap-2 font-medium"><span class="text-primary-600">✓</span> Priorytetowe wsparcie</li>
+          </ul>
+          <a routerLink="/app" class="w-full py-4 text-center border border-slate-200 text-slate-700 font-bold rounded-xl hover:bg-white transition-all">Wybierz PREMIUM</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-32 bg-slate-50 border-t border-slate-200">
+    <div class="container mx-auto px-6 lg:px-12 max-w-3xl">
+      <h2 class="text-3xl font-bold text-center mb-16 text-slate-900">Częste pytania o zysk i czas</h2>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-2xl p-6 border border-slate-200 open:border-primary-300 transition-all shadow-sm">
+          <summary class="font-bold cursor-pointer list-none flex justify-between items-center text-slate-700">
+            Ile realnie czasu zaoszczędzę?
+            <span class="text-primary-600 transition-transform group-open:rotate-180 font-bold">↓</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-500 leading-relaxed font-medium">Średnio warsztaty oszczędzają 2 godziny dziennie na samej komunikacji i szukaniu informacji. Policz to x 20 dni roboczych – to cały tydzień pracy dodatkowo!</p>
+        </details>
+        <details class="group bg-white rounded-2xl p-6 border border-slate-200 open:border-primary-300 transition-all shadow-sm">
+          <summary class="font-bold cursor-pointer list-none flex justify-between items-center text-slate-700">
+            Czy moi mechanicy będą potrafili to obsłużyć?
+            <span class="text-primary-600 transition-transform group-open:rotate-180 font-bold">↓</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-500 leading-relaxed font-medium">Jeśli potrafią używać Facebooka lub OLX, poradzą sobie z Tablicą Zleceń. Interfejs jest tak prosty, że szkolenie trwa 30 sekund.</p>
+        </details>
+        <details class="group bg-white rounded-2xl p-6 border border-slate-200 open:border-primary-300 transition-all shadow-sm">
+          <summary class="font-bold cursor-pointer list-none flex justify-between items-center text-slate-700">
+            Czy mogę przenieść dane z Excela?
+            <span class="text-primary-600 transition-transform group-open:rotate-180 font-bold">↓</span>
+          </summary>
+          <p class="mt-4 text-sm text-slate-500 leading-relaxed font-medium">Tak, oferujemy darmowy import Twojej bazy klientów i części z plików CSV/Excel, abyś mógł ruszyć z kopyta w 5 minut.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-32 bg-primary-600 relative overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-12 text-center relative z-10">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-12">Przestań topić czas w chaosie. Zacznij zarabiać.</h2>
+      <div class="flex flex-col items-center gap-8">
+        <a routerLink="/app" class="inline-flex items-center gap-3 px-10 py-5 bg-white text-primary-700 text-xl font-bold rounded-2xl shadow-2xl hover:scale-105 transition-all">
+          Zacznij zarabiać więcej →
+        </a>
+        <div class="flex flex-wrap justify-center gap-8 text-white/60 text-xs font-bold uppercase tracking-widest">
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 bg-white/10 rounded flex items-center justify-center">✓</span>
+            Brak Karty Kredytowej
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 bg-white/10 rounded flex items-center justify-center">✓</span>
+            Gotowy w 5 minut
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 bg-white/10 rounded flex items-center justify-center">✓</span>
+            Aplikacja Mobilna (PWA)
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-[100px] -mr-48 -mt-48"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-16 bg-white border-t border-slate-200">
+    <div class="container mx-auto px-6 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-8 text-sm">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-slate-100 rounded flex items-center justify-center font-bold text-slate-600 text-[10px]">TZ</div>
+        <span class="font-bold text-slate-900">Tablica Zleceń</span>
+      </div>
+      <p class="text-slate-400 font-medium font-medium">&copy; 2026 Tablica Zleceń. Wszystkie prawa zastrzeżone.</p>
+      <div class="flex gap-8 text-slate-500 font-semibold">
+        <a href="#" class="hover:text-primary-600">Polityka prywatności</a>
+        <a href="#" class="hover:text-primary-600">Regulamin</a>
+      </div>
+    </div>
+  </footer>
+</div>
