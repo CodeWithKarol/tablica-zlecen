@@ -3,10 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "set-env": "ts-node scripts/set-env.mts",
-    "prebuild": "npm run set-env",
-    "start": "npm run set-env && ng serve",
-    "build": "ng build",
+    "start": "ng serve",
+    "build": "ng build --define=SUPABASE_URL=\"'$SUPABASE_URL'\" --define=SUPABASE_KEY=\"'$SUPABASE_ANON_KEY'\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:tablica-zlecen": "node dist/tablica-zlecen/server/server.mjs"

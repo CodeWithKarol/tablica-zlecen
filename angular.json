@@ -34,34 +34,38 @@
               "entry": "src/server.ts"
             }
           },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+            "configurations": {
+              "production": {
+                "budgets": [
+                  {
+                    "type": "initial",
+                    "maximumWarning": "500kB",
+                    "maximumError": "1MB"
+                  },
+                  {
+                    "type": "anyComponentStyle",
+                    "maximumWarning": "4kB",
+                    "maximumError": "8kB"
+                  }
+                ],
+                "outputHashing": "all"
+              },
+              "development": {
+                "define": {
+                  "SUPABASE_URL": "'https://nsyzebytsihmnwffgpxn.supabase.co'",
+                  "SUPABASE_KEY": "'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zeXplYnl0c2lobW53ZmZncHhuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwODM2ODIsImV4cCI6MjA4ODY1OTY4Mn0.QN-R18cJVbf1IWxiVnEjrgaangw55ZFHu5iCiMN7Sqw'"
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
-              "outputHashing": "all"
+                "optimization": false,
+                "extractLicenses": false,
+                "sourceMap": true,
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.development.ts"
+                  }
+                ]
+              }
             },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
-            }
-          },
           "defaultConfiguration": "production"
         },
         "serve": {
