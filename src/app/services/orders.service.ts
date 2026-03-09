@@ -1,4 +1,5 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../environments/environment';
 
@@ -20,6 +21,7 @@ export interface Order {
 })
 export class OrdersService {
   private supabase: SupabaseClient;
+  private platformId = inject(PLATFORM_ID);
   private ordersSignal = signal<Order[]>([]);
 
   readonly orders = computed(() => this.ordersSignal());
@@ -28,8 +30,14 @@ export class OrdersService {
     console.log('Initializing Supabase with URL:', environment.supabaseUrl);
     console.log('Supabase Key (masked):', environment.supabaseKey ? `${environment.supabaseKey.substring(0, 10)}...${environment.supabaseKey.substring(environment.supabaseKey.length - 5)}` : 'MISSING');
     this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+    
+    // We can fetch orders on both server and client for SSR benefits
     this.fetchOrders();
-    this.setupRealtimeSync();
+
+    // ONLY initialize Realtime (WebSockets) in the browser
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupRealtimeSync();
+    }
   }
 
   private async fetchOrders() {
