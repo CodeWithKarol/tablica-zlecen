@@ -5,12 +5,12 @@ import { env } from 'process';
 // This is intended for use in CI/CD environments like Vercel.
 const targetPath = './src/environments/environment.ts';
 
-if (env['SUPABASE_URL'] && env['SUPABASE_KEY']) {
+if (env['SUPABASE_URL'] && env['SUPABASE_ANON_KEY']) {
   const environmentFileContent = `
 export const environment = {
   production: true,
   supabaseUrl: '${env['SUPABASE_URL']}',
-  supabaseKey: '${env['SUPABASE_KEY']}'
+  supabaseKey: '${env['SUPABASE_ANON_KEY']}'
 };
 `;
 
@@ -22,5 +22,5 @@ export const environment = {
     console.log(`Successfully injected environment variables to ${targetPath}`);
   });
 } else {
-  console.log('Missing SUPABASE_URL or SUPABASE_KEY. Skipping environment injection (using local defaults).');
+  console.log('Missing SUPABASE_URL or SUPABASE_ANON_KEY. Skipping environment injection (using local defaults).');
 }
