@@ -8,58 +8,69 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
   template: `
     <div class="max-w-4xl mx-auto py-4">
-      <div class="mb-10">
-        <h2 class="text-4xl font-bold text-slate-900 tracking-tight">Automatyzacja Webhook</h2>
-        <p class="text-slate-500 mt-2 font-medium">Połącz Tablicę Zleceń z n8n, Make lub Zapier, aby wyzwalać akcje zewnętrzne.</p>
+      <div class="flex items-end justify-between mb-12 border-b-2 border-black pb-8">
+        <div>
+          <h2 class="text-5xl font-black uppercase tracking-tighter">Automatyzacja_W_Systemie</h2>
+          <div class="flex items-center gap-4 mt-2 font-mono text-[10px] uppercase">
+            <span class="text-orange-600 font-bold">[POŁĄCZENIE: WEBHOOK_POST]</span>
+            <span class="text-zinc-400">// INTEGRACJA_ZE_STACJĄ_ZEWNĘTRZNĄ</span>
+          </div>
+        </div>
       </div>
 
-      <div class="grid gap-10">
+      <div class="grid gap-12">
         <!-- Webhook Settings Card -->
-        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
-          <div class="p-8 border-b border-slate-100 bg-slate-50/50">
-            <h3 class="font-bold text-slate-900 flex items-center gap-3">
-              <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600">🔗</div>
-              Główny Endpoint
+        <div class="bg-white border border-black">
+          <div class="p-8 border-b border-black bg-zinc-100 flex items-center justify-between">
+            <h3 class="font-black text-xs uppercase tracking-widest flex items-center gap-3">
+              <div class="w-10 h-10 bg-black text-white flex items-center justify-center font-black text-xs border border-black">🔗</div>
+              Główny Endpoint Wyjściowy
             </h3>
+            <span class="font-mono text-[10px] font-bold text-orange-600">[ID: SYSTEM_AUTO_01]</span>
           </div>
           <div class="p-8 space-y-8">
             <div>
-              <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">Webhook URL (n8n / Make.com / Zapier)</label>
+              <label class="block text-[10px] font-black uppercase tracking-widest text-zinc-400 mb-3">Webhook URL (n8n / Make.com / Zapier)</label>
               <input 
                 type="text" 
                 [(ngModel)]="webhookUrl"
                 placeholder="https://twoj-n8n.com/webhooks/..."
-                class="w-full px-5 py-4 rounded-xl border border-slate-200 focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all font-mono text-sm bg-slate-50/30"
+                class="w-full px-5 py-4 border border-black focus:outline-none focus:ring-1 focus:ring-orange-600 transition-none font-mono text-sm bg-zinc-50/30"
               >
             </div>
 
-            <div class="flex items-start gap-4 p-6 bg-primary-50 rounded-2xl border border-primary-100">
-               <div class="w-8 h-8 flex-none bg-primary-600 rounded-full flex items-center justify-center text-white text-xs font-bold">i</div>
-               <p class="text-sm text-primary-900 leading-relaxed font-medium">
-                  Informacja: Webhook zostanie wyzwolony za każdym razem, gdy zlecenie zostanie przesunięte do statusu <strong>"Gotowe / SMS"</strong>. Umożliwia to wysyłanie powiadomień lub aktualizację arkuszy.
+            <div class="flex items-start gap-4 p-6 bg-zinc-50 border border-black font-mono">
+               <div class="w-6 h-6 flex-none bg-orange-600 text-black flex items-center justify-center text-[10px] font-black">!</div>
+               <p class="text-[11px] text-black leading-relaxed font-bold uppercase">
+                  INFORMACJA: WEBHOOK ZOSTANIE WYZWOLONY ZA KAŻDYM RAZEM, GDY ZLECENIE ZOSTANIE PRZESUNIĘTE DO STATUSU <span class="text-orange-600">"GOTOWE / SMS"</span>. UMOŻLIWIA TO WYSYŁANIE POWIADOMIEŃ LUB AKTUALIZACJĘ ARKUSZY.
                </p>
             </div>
             
             <button 
               (click)="saveSettings()"
-              class="w-full sm:w-auto px-10 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-all shadow-lg shadow-primary-500/20 active:scale-95">
-              Zapisz Konfigurację
+              class="w-full sm:w-auto px-10 py-5 bg-black text-white font-black uppercase text-sm hover:bg-orange-600 hover:text-black transition-none active:scale-100">
+              Zapisz Konfigurację_Systemu
             </button>
           </div>
         </div>
 
         <!-- Payload Preview -->
-        <div class="bg-slate-900 rounded-[2rem] p-10 text-white relative overflow-hidden shadow-2xl">
+        <div class="bg-black border border-black p-10 text-white relative overflow-hidden shadow-2xl">
            <div class="relative z-10">
-              <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold">Struktura danych (JSON)</h3>
-                <span class="px-3 py-1 bg-white/10 rounded-full text-[10px] font-black uppercase tracking-widest text-white/60">Payload POST</span>
+              <div class="flex items-center justify-between mb-8 border-b border-white/20 pb-4">
+                <h3 class="text-sm font-black uppercase tracking-widest">Struktura danych (JSON)</h3>
+                <span class="px-3 py-1 border border-orange-600 text-[10px] font-black uppercase tracking-widest text-orange-600">Payload POST</span>
               </div>
-              <p class="text-white/40 text-sm mb-6 font-medium">Poniższy obiekt zostanie wysłany w body zapytania:</p>
+              <p class="text-white/40 text-[10px] font-mono uppercase mb-6 tracking-widest">Poniższy obiekt zostanie wysłany w body zapytania:</p>
               
-              <pre class="bg-black/40 p-8 rounded-2xl border border-white/5 text-xs font-mono text-primary-300 leading-relaxed overflow-x-auto shadow-inner">
+              <pre class="bg-zinc-900/50 p-8 border border-white/5 text-[11px] font-mono text-orange-500 leading-relaxed overflow-x-auto">
 {{ payloadPreview }}
               </pre>
+
+              <div class="mt-8 font-mono text-[9px] text-zinc-500 uppercase flex items-center gap-2">
+                 <span class="w-2 h-2 bg-orange-600 animate-pulse"></span>
+                 Oczekiwanie na zdarzenie systemowe...
+              </div>
            </div>
         </div>
       </div>
