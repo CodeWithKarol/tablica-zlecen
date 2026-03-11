@@ -82,7 +82,7 @@ export class OrdersService {
     }
   }
 
-  async addOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>) {
+  async createOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>) {
     const { error } = await this.supabase
       .from('orders')
       .insert([

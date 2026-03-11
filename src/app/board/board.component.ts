@@ -7,11 +7,12 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { OrdersService, Order, OrderStatus } from '../services/orders.service';
+import { OrderFormComponent } from './order-form.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule],
+  imports: [CommonModule, DragDropModule, OrderFormComponent],
   template: `
 <div class="h-full flex flex-col">
   <div class="flex items-end justify-between mb-12 border-b-2 border-black pb-8">
@@ -22,7 +23,8 @@ import { OrdersService, Order, OrderStatus } from '../services/orders.service';
         <span class="text-zinc-400">// ANALIZA_ZLECEŃ: {{ orderService.orders().length }} OBIEKTÓW</span>
       </div>
     </div>
-    <button class="bg-black text-white px-8 py-4 font-black uppercase text-sm hover:bg-orange-600 hover:text-black transition-none">
+    <button (click)="showOrderForm.set(true)" 
+            class="bg-black text-white px-8 py-4 font-black uppercase text-sm hover:bg-orange-600 hover:text-black transition-none">
       + Nowe Zlecenie
     </button>
   </div>
@@ -71,6 +73,10 @@ import { OrdersService, Order, OrderStatus } from '../services/orders.service';
       </div>
     }
   </div>
+
+  @if (showOrderForm()) {
+    <app-order-form (close)="showOrderForm.set(false)" />
+  }
 </div>
 `,
   styles: [`
@@ -89,6 +95,7 @@ import { OrdersService, Order, OrderStatus } from '../services/orders.service';
 })
 export class BoardComponent {
   public orderService = inject(OrdersService);
+  public showOrderForm = signal(false);
 
   columns: { id: OrderStatus; title: string }[] = [
     { id: 'new', title: 'Nowe' },
