@@ -8,11 +8,12 @@ import {
 } from '@angular/cdk/drag-drop';
 import { OrdersService, Order, OrderStatus } from '../services/orders.service';
 import { OrderFormComponent } from './order-form.component';
+import { OrderPrintComponent } from './order-print.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, DragDropModule, OrderFormComponent],
+  imports: [CommonModule, DragDropModule, OrderFormComponent, OrderPrintComponent],
   template: `
 <div class="h-full flex flex-col">
   <div class="flex items-end justify-between mb-12 border-b-2 border-black pb-8">
@@ -63,12 +64,19 @@ import { OrderFormComponent } from './order-form.component';
           @for (order of getOrdersByStatus(column.id); track order.id) {
             <div cdkDrag [cdkDragData]="order" 
                  class="bg-white p-6 border-b border-black hover:bg-zinc-50 transition-none cursor-grab active:cursor-grabbing group relative">
+              
               <div class="flex justify-between items-start mb-4">
                 <span class="font-mono text-[10px] font-black tracking-tighter text-black border border-black px-2 py-0.5 uppercase">
                   {{ order.customerPhone }}
                 </span>
-                <div class="w-3 h-3 border border-black group-hover:bg-orange-600 transition-none"
-                     [class.bg-orange-600]="order.priority === 'high'"></div>
+                <div class="flex items-center gap-2">
+                  <button (click)="selectedOrderForPrint.set(order); $event.stopPropagation()"
+                          class="opacity-0 group-hover:opacity-100 text-[8px] font-black uppercase bg-black text-white px-2 py-1 hover:bg-orange-600 transition-none">
+                    Drukuj
+                  </button>
+                  <div class="w-3 h-3 border border-black group-hover:bg-orange-600 transition-none"
+                       [class.bg-orange-600]="order.priority === 'high'"></div>
+                </div>
               </div>
               <h4 class="font-black text-sm uppercase mb-1 leading-none">{{ order.carModel }}</h4>
               <p class="text-[11px] text-zinc-500 font-medium line-clamp-2 leading-tight mb-6">{{ order.issueDescription }}</p>
@@ -92,6 +100,10 @@ import { OrderFormComponent } from './order-form.component';
   @if (showOrderForm()) {
     <app-order-form (close)="showOrderForm.set(false)" />
   }
+
+  @if (selectedOrderForPrint(); as order) {
+    <app-order-print [order]="order" (close)="selectedOrderForPrint.set(null)" />
+  }
 </div>
 `,
   styles: [`
@@ -112,6 +124,7 @@ export class BoardComponent {
   public orderService = inject(OrdersService);
   public showOrderForm = signal(false);
   public searchQuery = signal('');
+  public selectedOrderForPrint = signal<Order | null>(null);
 
   public filteredOrders = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
