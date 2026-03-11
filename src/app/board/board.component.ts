@@ -48,9 +48,10 @@ import { OrdersService, Order, OrderStatus } from '../services/orders.service';
                  class="bg-white p-6 border-b border-black hover:bg-zinc-50 transition-none cursor-grab active:cursor-grabbing group relative">
               <div class="flex justify-between items-start mb-4">
                 <span class="font-mono text-[10px] font-black tracking-tighter text-black border border-black px-2 py-0.5 uppercase">
-                  {{ order.licensePlate }}
+                  {{ order.customerPhone }}
                 </span>
-                <div class="w-3 h-3 border border-black group-hover:bg-orange-600 transition-none"></div>
+                <div class="w-3 h-3 border border-black group-hover:bg-orange-600 transition-none"
+                     [class.bg-orange-600]="order.priority === 'high'"></div>
               </div>
               <h4 class="font-black text-sm uppercase mb-1 leading-none">{{ order.carModel }}</h4>
               <p class="text-[11px] text-zinc-500 font-medium line-clamp-2 leading-tight mb-6">{{ order.issueDescription }}</p>
@@ -91,9 +92,9 @@ export class BoardComponent {
 
   columns: { id: OrderStatus; title: string }[] = [
     { id: 'new', title: 'Nowe' },
-    { id: 'progress', title: 'W trakcie' },
-    { id: 'waiting', title: 'Czeka na części' },
-    { id: 'done', title: 'Gotowe / SMS' },
+    { id: 'progress', title: 'W toku' },
+    { id: 'done', title: 'Gotowe' },
+    { id: 'collected', title: 'Odebrane' },
   ];
 
   getOrdersByStatus(status: OrderStatus) {

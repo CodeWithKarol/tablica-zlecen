@@ -3,15 +3,18 @@ import { isPlatformBrowser } from '@angular/common';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 // no more environment import
 
-export type OrderStatus = 'new' | 'progress' | 'waiting' | 'done';
+export type OrderStatus = 'new' | 'progress' | 'done' | 'collected';
 
 export interface Order {
   id: string;
   customerName: string;
+  customerPhone: string;
   carModel: string;
-  licensePlate: string;
   issueDescription: string;
   status: OrderStatus;
+  deadline?: string;
+  priority: 'low' | 'medium' | 'high';
+  estimatedPrice?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -85,10 +88,13 @@ export class OrdersService {
       .insert([
         {
           customer_name: order.customerName,
+          customer_phone: order.customerPhone,
           car_model: order.carModel,
-          license_plate: order.licensePlate,
           issue_description: order.issueDescription,
-          status: order.status
+          status: order.status,
+          deadline: order.deadline,
+          priority: order.priority,
+          estimated_price: order.estimatedPrice
         }
       ]);
 
@@ -101,10 +107,13 @@ export class OrdersService {
     return {
       id: raw.id,
       customerName: raw.customer_name,
+      customerPhone: raw.customer_phone,
       carModel: raw.car_model,
-      licensePlate: raw.license_plate,
       issueDescription: raw.issue_description,
       status: raw.status as OrderStatus,
+      deadline: raw.deadline,
+      priority: raw.priority,
+      estimatedPrice: raw.estimated_price,
       createdAt: new Date(raw.created_at),
       updatedAt: new Date(raw.updated_at)
     };
