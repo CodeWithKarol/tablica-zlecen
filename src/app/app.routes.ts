@@ -21,6 +21,10 @@ export const routes: Routes = [
         loadComponent: () => import('./board/board.component').then(m => m.BoardComponent),
       },
       {
+        path: 'clients',
+        loadComponent: () => import('./clients/client-list.component').then(m => m.ClientListComponent),
+      },
+      {
         path: 'settings',
         loadComponent: () => import('./settings/webhook-config.component').then(m => m.WebhookConfigComponent),
       }
