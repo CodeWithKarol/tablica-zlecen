@@ -20,43 +20,23 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative pt-20 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
-    <div class="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
-      <div class="max-w-2xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 border border-primary-100 text-primary-700 text-xs font-bold mb-8">
-          <span class="flex h-2 w-2 rounded-full bg-primary-500"></span>
-          Twój warsztat na autopilocie
-        </div>
-        <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1] mb-8">
-          Zyskaj <span class="text-primary-600">2 godziny</span> spokoju każdego dnia
-        </h1>
-        <p class="text-lg lg:text-xl text-slate-500 leading-relaxed mb-10 max-w-xl font-medium">
-          Tablica, która sama pilnuje terminów. Koniec z dzwonieniem do klientów („kiedy gotowe?”). Zacznij zarabiać więcej w 5 minut.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4">
-          <a routerLink="/app" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold text-lg rounded-xl shadow-lg shadow-primary-500/20 transition-all text-center">
-            Uruchom darmowe demo
-          </a>
-          <a href="#demo" class="px-8 py-4 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-700 transition-all text-center flex items-center justify-center gap-2">
-            <span>▶</span> Zobacz jak to działa
-          </a>
-        </div>
-        <div class="mt-12 flex items-center gap-4">
-          <div class="flex -space-x-3">
-             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-200"></div>
-             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-300"></div>
-             <div class="w-10 h-10 rounded-full border-2 border-white bg-slate-400"></div>
-          </div>
-          <div class="text-sm">
-             <p class="font-bold text-slate-900 leading-none">Dla profesjonalistów</p>
-             <p class="text-slate-500 text-xs mt-1">zaufało nam już 50+ warsztatów</p>
-          </div>
-        </div>
+  <header class="min-h-[80vh] border-b border-black grid lg:grid-cols-12">
+    <div class="lg:col-span-7 p-8 lg:p-16 flex flex-col justify-center border-r border-black">
+      <h1 class="text-6xl lg:text-9xl font-black uppercase leading-[0.85] tracking-tighter mb-12">
+        PRECISION<br><span class="text-orange-600">WORKSHOP</span><br>CONTROL.
+      </h1>
+      <p class="max-w-md font-medium text-lg mb-12">
+        Eliminate chaos. Automate status updates. Professionalize your garage in 5 minutes with our industrial-grade management board.
+      </p>
+      <div class="flex gap-4">
+        <a routerLink="/app" class="px-8 py-5 bg-black text-white font-black uppercase text-xl hover:bg-orange-600 transition-none">
+          Start Free Demo
+        </a>
       </div>
-
-      <div class="relative lg:-mr-24 scale-105">
-        <app-hero-board />
-      </div>
+    </div>
+    <div class="lg:col-span-5 bg-zinc-100 p-8 flex items-center justify-center overflow-hidden relative">
+      <div class="scanline"></div>
+      <app-hero-board class="w-full scale-110" />
     </div>
   </header>
 
