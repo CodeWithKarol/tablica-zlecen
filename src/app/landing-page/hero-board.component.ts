@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     <div class="bg-white border-2 border-black overflow-hidden max-w-lg mx-auto relative font-mono">
       <!-- Top Bar Mockup -->
       <div class="bg-black text-white p-2 border-b-2 border-black flex justify-between items-center">
-        <span class="text-[10px] font-bold uppercase tracking-widest">SYSTEM_V2.0 // LIVE_FEED</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest">SYSTEM_V2.0 // PODGLĄD_NA_ŻYWO</span>
         <div class="flex gap-1">
           <div class="w-2 h-2 bg-orange-600"></div>
           <div class="w-2 h-2 bg-white"></div>
@@ -101,7 +101,7 @@ import { CommonModule } from '@angular/common';
                        <p class="text-[8px] text-orange-600 font-black uppercase tracking-tighter flex items-center gap-1">
                           <span class="w-1.5 h-1.5 bg-orange-600"></span> SMS WYSŁANY
                        </p>
-                       <span class="text-[7px] font-mono text-zinc-400 uppercase tracking-tighter">MAKE.COM_HOOK_OK</span>
+                       <span class="text-[7px] font-mono text-zinc-400 uppercase tracking-tighter">AUTOMAT_OK</span>
                     </div>
                   </div>
                </div>
@@ -115,8 +115,8 @@ import { CommonModule } from '@angular/common';
         <div class="absolute inset-0 z-50 flex items-center justify-center bg-black/10 backdrop-blur-[1px] animate-in fade-in duration-200">
            <div class="bg-black text-white px-6 py-6 border-2 border-white shadow-[0_0_0_2px_rgba(0,0,0,1)] flex flex-col items-center text-center gap-2 transform animate-in zoom-in-95 duration-200">
               <div class="w-10 h-10 bg-orange-600 flex items-center justify-center text-xl mb-2">⚡</div>
-              <h4 class="text-[10px] font-black uppercase tracking-widest text-orange-600">WEBHOOK_TRIGGERED</h4>
-              <p class="text-[8px] font-bold uppercase text-zinc-400 max-w-[150px]">Data transmitted to automation system</p>
+              <h4 class="text-[10px] font-black uppercase tracking-widest text-orange-600">WYKRYTO_ZMIANĘ</h4>
+              <p class="text-[8px] font-bold uppercase text-zinc-400 max-w-[150px]">Powiadomienie przesyłane do klienta</p>
               <div class="mt-4 w-full h-1 bg-zinc-800 overflow-hidden">
                  <div class="h-full bg-orange-600 animate-[loading_4s_linear]"></div>
               </div>
