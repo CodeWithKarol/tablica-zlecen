@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   CdkDragDrop,
@@ -20,9 +20,24 @@ import { OrderFormComponent } from './order-form.component';
       <h2 class="text-5xl font-black uppercase tracking-tighter">System_Tablicy</h2>
       <div class="flex items-center gap-4 mt-2 font-mono text-[10px] uppercase">
         <span class="text-orange-600 font-bold">[STATUS: ACTIVE]</span>
-        <span class="text-zinc-400">// ANALIZA_ZLECEŃ: {{ orderService.orders().length }} OBIEKTÓW</span>
+        <span class="text-zinc-400">// ANALIZA_ZLECEŃ: {{ filteredOrders().length }} OBIEKTÓW</span>
       </div>
     </div>
+
+    <div class="flex-1 max-w-md mx-12 mb-1">
+      <div class="relative">
+        <input 
+          type="text" 
+          (input)="searchQuery.set($any($event.target).value)"
+          placeholder="SZUKAJ_ZLECENIA..." 
+          class="w-full bg-zinc-50 border border-black px-4 py-3 font-mono text-[11px] uppercase focus:outline-none focus:bg-white focus:border-orange-600 transition-none placeholder:text-zinc-400"
+        />
+        <div class="absolute -top-2 left-3 bg-black text-white text-[8px] px-1.5 py-0.5 font-mono uppercase tracking-widest pointer-events-none">
+          FILTR_WYSZUKIWANIA
+        </div>
+      </div>
+    </div>
+
     <button (click)="showOrderForm.set(true)" 
             class="bg-black text-white px-8 py-4 font-black uppercase text-sm hover:bg-orange-600 hover:text-black transition-none">
       + Nowe Zlecenie
@@ -96,6 +111,20 @@ import { OrderFormComponent } from './order-form.component';
 export class BoardComponent {
   public orderService = inject(OrdersService);
   public showOrderForm = signal(false);
+  public searchQuery = signal('');
+
+  public filteredOrders = computed(() => {
+    const query = this.searchQuery().toLowerCase().trim();
+    const orders = this.orderService.orders();
+    if (!query) return orders;
+
+    return orders.filter(order => 
+      order.customerName.toLowerCase().includes(query) ||
+      order.carModel.toLowerCase().includes(query) ||
+      order.customerPhone.includes(query) ||
+      order.issueDescription.toLowerCase().includes(query)
+    );
+  });
 
   columns: { id: OrderStatus; title: string }[] = [
     { id: 'new', title: 'Nowe' },
@@ -105,7 +134,7 @@ export class BoardComponent {
   ];
 
   getOrdersByStatus(status: OrderStatus) {
-    return this.orderService.orders().filter((o) => o.status === status);
+    return this.filteredOrders().filter((o) => o.status === status);
   }
 
   drop(event: CdkDragDrop<OrderStatus>) {
