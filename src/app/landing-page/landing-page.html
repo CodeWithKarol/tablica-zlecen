@@ -1,19 +1,21 @@
 <div class="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-primary-100 selection:text-primary-900">
   <!-- Navigation -->
-  <nav class="sticky top-0 w-full z-50 flex items-center justify-between p-6 lg:px-12 bg-white/80 backdrop-blur-xl border-b border-slate-200">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 bg-primary-600 rounded flex items-center justify-center font-bold text-white text-sm">TZ</div>
-      <span class="font-bold tracking-tight text-xl text-slate-900">Tablica Zleceń</span>
+  <nav class="border-b border-black sticky top-0 bg-white z-[100] flex flex-col">
+    <div class="flex justify-between items-center p-4 border-b border-black">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-black text-white flex items-center justify-center font-black text-xs">TZ</div>
+        <span class="font-black uppercase tracking-tighter text-xl">TABLICA ZLECEN</span>
+      </div>
+      <div class="hidden md:flex gap-8 font-bold text-xs uppercase tracking-widest">
+        <a href="#features" class="hover:text-orange-600">Features</a>
+        <a href="#pricing" class="hover:text-orange-600">Pricing</a>
+        <a routerLink="/app" class="bg-black text-white px-4 py-2 hover:bg-orange-600 transition-colors">Launch App</a>
+      </div>
     </div>
-    <div class="hidden lg:flex gap-10 text-sm font-semibold text-slate-500">
-      <a href="#features" class="hover:text-primary-600 transition-colors">Funkcje</a>
-      <a href="#pricing" class="hover:text-primary-600 transition-colors">Cennik</a>
-      <a href="#faq" class="hover:text-primary-600 transition-colors">FAQ</a>
-    </div>
-    <div class="flex items-center gap-4">
-      <a routerLink="/app" class="text-sm font-bold bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-lg shadow-sm transition-all focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
-        Uruchom aplikację
-      </a>
+    <div class="bg-black text-white py-1 px-4 overflow-hidden whitespace-nowrap">
+      <div class="animate-marquee inline-block font-mono text-[10px] uppercase tracking-widest">
+        [12:05] NEW ORDER: VW GOLF • [12:08] SMS SENT TO +48 600... • [12:15] STATUS UPDATED: AUDI A4 • 
+      </div>
     </div>
   </nav>
 
