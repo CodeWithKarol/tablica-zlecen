@@ -79,6 +79,55 @@ export class OrdersService {
 
     if (error) {
       console.error('Error updating order:', error);
+    } else if (newStatus === 'done') {
+      this.triggerAutomation(orderId);
+    }
+  }
+
+  private async triggerAutomation(orderId: string) {
+    // For MVP 0.1, we fetch the order details and log the event
+    const { data, error } = await this.supabase
+      .from('orders')
+      .select('*')
+      .eq('id', orderId)
+      .single();
+
+    if (error || !data) {
+      console.error('Automation: Could not fetch order details:', error);
+      return;
+    }
+
+    const order = this.mapToOrder(data);
+    const payload = {
+      event: 'order.status_changed',
+      newStatus: 'done',
+      order: {
+        id: order.id,
+        customer: order.customerName,
+        car: order.carModel,
+        phone: order.customerPhone
+      },
+      timestamp: new Date().toISOString()
+    };
+
+    console.log('%c[AUTOMATION TRIGGERED]', 'background: #ea580c; color: white; padding: 2px 5px; font-weight: bold;');
+    console.log('Status changed to DONE for order:', order.id);
+    console.log('Payload:', payload);
+
+    // Placeholder for real webhook call
+    const savedUrl = typeof window !== 'undefined' ? localStorage.getItem('system_webhook_url') : null;
+    if (savedUrl) {
+      console.log('Sending webhook to:', savedUrl);
+      try {
+        await fetch(savedUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        console.log('Webhook sent successfully');
+      } catch (e) {
+        console.error('Webhook delivery failed:', e);
+      }
     }
   }
 
