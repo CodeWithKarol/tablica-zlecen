@@ -4,29 +4,42 @@
   color: #ffffff;
 }
 
-/* Kinetic Glass Base */
+/* Kinetic Glass Base - Enhanced Visibility */
 .glass-container {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px) saturate(180%);
-  -webkit-backdrop-filter: blur(12px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.9);
 }
 
 .neon-orange {
-  color: #ff4d00;
-  text-shadow: 0 0 20px rgba(255, 77, 0, 0.5);
+  color: #ff5c1a; /* Slightly brighter for better contrast on black */
+  text-shadow: 0 0 25px rgba(255, 92, 26, 0.4);
 }
 
 .bg-neon-orange {
-  background-color: #ff4d00;
-  box-shadow: 0 0 30px rgba(255, 77, 0, 0.4);
+  background-color: #ff5c1a;
+  box-shadow: 0 0 35px rgba(255, 92, 26, 0.5);
+}
+
+/* Text Visibility Classes */
+.text-high-contrast {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.text-medium-contrast {
+  color: rgba(255, 255, 255, 0.75); /* Increased from 0.6 */
+}
+
+.text-low-contrast {
+  color: rgba(255, 255, 255, 0.55); /* Increased from 0.3/0.4 */
 }
 
 /* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
-  50% { transform: translateY(-10px) rotateX(2deg) rotateY(1deg); }
+  50% { transform: translateY(-12px) rotateX(2deg) rotateY(1deg); }
 }
 
 @keyframes pulse-glow {
