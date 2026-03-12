@@ -7,6 +7,7 @@
   --color-bg-tech: #F2F2F2;
   --color-ink-black: #000000;
   --color-hazard-orange: #FF4D00;
+  --color-neon-orange: #ff5c1a;
   --border-industrial: 1px solid var(--color-ink-black);
 }
 
@@ -39,10 +40,14 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+html, body {
+  height: 100%;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--color-bg-white);
-  color: var(--color-ink-black);
+  background-color: #050505;
+  color: #ffffff;
   margin: 0;
   -webkit-font-smoothing: antialiased;
 }
@@ -55,4 +60,91 @@ body {
 .animate-marquee {
   animation: marquee 30s linear infinite;
   display: inline-block;
+}
+
+/* Design System Utilities */
+.glass-container {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.9);
+}
+
+.neon-orange {
+  color: #ff5c1a;
+  text-shadow: 0 0 25px rgba(255, 92, 26, 0.4);
+}
+
+.bg-neon-orange {
+  background-color: #ff5c1a;
+  box-shadow: 0 0 35px rgba(255, 92, 26, 0.5);
+}
+
+.text-high-contrast {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.text-medium-contrast {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.text-low-contrast {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 92, 26, 0.3);
+}
+
+@media print {
+  /* Hide all application layout elements */
+  aside, 
+  nav, 
+  [routerlink="/"], 
+  .absolute, 
+  .bg-white\/5,
+  .glass-container:not(.print-isolated) { 
+    display: none !important; 
+  }
+
+  /* Reset main layout constraints */
+  body, html {
+    background: white !important;
+    color: black !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+  }
+
+  /* Remove any background glows or fixed elements */
+  .relative.z-10 {
+    position: static !important;
+    padding: 0 !important;
+  }
+
+  /* Automatically hide browser headers/footers (Date, Title, URL) */
+  @page {
+    margin: 0;
+  }
+  
+  body {
+    padding: 1.5cm !important; /* Add virtual margin to replace browser headers */
+  }
 }
