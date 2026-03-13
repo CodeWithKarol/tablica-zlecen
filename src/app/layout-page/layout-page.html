@@ -1,48 +1,88 @@
-<div class="flex h-screen bg-white">
-  <!-- Sidebar -->
-  <aside class="w-72 bg-zinc-50 border-r border-black flex flex-col">
-    <div class="p-8 border-b border-black">
-      <div class="flex items-center gap-3">
-        <div class="w-6 h-6 bg-black text-white flex items-center justify-center font-black text-xs">TZ</div>
-        <span class="font-black tracking-tighter text-xl uppercase">Tablica Zleceń</span>
+<div class="flex flex-col md:flex-row h-screen bg-[#050505] text-white font-sans selection:bg-orange-600/30 overflow-hidden">
+  <!-- Sidebar (Desktop) -->
+  <aside class="hidden md:flex w-72 glass-container flex-col border-r border-white/10 relative z-50">
+    <div class="p-8 border-b border-white/10">
+      <div class="flex items-center gap-3 group cursor-pointer" routerLink="/">
+        <div class="w-8 h-8 bg-neon-orange rounded-lg flex items-center justify-center font-black text-white text-xs transform group-hover:rotate-12 transition-transform shadow-[0_0_20px_rgba(255,92,26,0.3)]">TZ</div>
+        <span class="font-black uppercase tracking-widest text-lg group-hover:text-orange-500 transition-colors">Tablica Zleceń</span>
       </div>
     </div>
     <nav class="flex-1 px-0 py-4 space-y-0">
+      <a routerLink="/app/dashboard" 
+         routerLinkActive="bg-white/10 !text-orange-500 border-orange-600/50" 
+         [routerLinkActiveOptions]="{exact: true}"
+         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-white/10 transition-all group hover:bg-white/5 hover:text-orange-500">
+        <span class="font-mono text-[10px] opacity-40 group-[.active]:opacity-100">00</span>
+        Start
+      </a>
       <a routerLink="/app/board" 
-         routerLinkActive="bg-black text-white" 
-         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-black transition-none group hover:bg-orange-600 hover:text-black">
+         routerLinkActive="bg-white/10 !text-orange-500 border-orange-600/50" 
+         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-white/10 transition-all group hover:bg-white/5 hover:text-orange-500">
         <span class="font-mono text-[10px] opacity-40 group-[.active]:opacity-100">01</span>
         Tablica
       </a>
       <a routerLink="/app/clients" 
-         routerLinkActive="bg-black text-white" 
-         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-black transition-none group hover:bg-orange-600 hover:text-black">
+         routerLinkActive="bg-white/10 !text-orange-500 border-orange-600/50" 
+         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-white/10 transition-all group hover:bg-white/5 hover:text-orange-500">
         <span class="font-mono text-[10px] opacity-40 group-[.active]:opacity-100">02</span>
         Klienci
       </a>
       <a routerLink="/app/settings" 
-         routerLinkActive="bg-black text-white" 
-         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-black transition-none group hover:bg-orange-600 hover:text-black">
+         routerLinkActive="bg-white/10 !text-orange-500 border-orange-600/50" 
+         class="flex items-center gap-4 py-4 px-8 font-black uppercase text-xs tracking-widest border-b border-white/10 transition-all group hover:bg-white/5 hover:text-orange-500">
         <span class="font-mono text-[10px] opacity-40 group-[.active]:opacity-100">03</span>
         Automatyzacja
       </a>
     </nav>
-    <div class="p-8 border-t border-black flex flex-col gap-6 bg-white">
-      <a routerLink="/" class="text-[10px] font-black uppercase tracking-widest text-zinc-400 hover:text-orange-600 flex items-center gap-2">
-        [ESC] POWRÓT
-      </a>
-      <div class="flex items-center gap-4">
-        <div class="w-10 h-10 bg-black border border-black flex items-center justify-center text-white font-mono text-xs">WJ</div>
+    <div class="p-8 border-t border-white/10 flex flex-col gap-6 bg-white/5 backdrop-blur-md">
+      <button (click)="logout()" class="text-[10px] font-black uppercase tracking-widest text-white/40 hover:text-red-500 flex items-center gap-2 transition-colors text-left">
+        [OFF] WYLOGUJ
+      </button>
+      <div class="flex items-center gap-4" *ngIf="user() as u">
+        <div class="w-10 h-10 bg-white/10 border border-white/20 flex items-center justify-center text-white font-mono text-xs shadow-inner">
+          {{ getInitials(u.email) }}
+        </div>
         <div class="flex-1 min-w-0 font-mono">
-          <p class="text-[10px] font-black uppercase truncate">WARSZTAT_U_JANA</p>
-          <p class="text-[9px] text-orange-600 font-bold">PLAN: PRO_SYSTEM</p>
+          <p class="text-[10px] font-black uppercase truncate text-high-contrast">{{ getWorkshopName(u.email) }}</p>
+          <p class="text-[9px] text-orange-500 font-bold">PLAN: PRO_SYSTEM</p>
         </div>
       </div>
     </div>
   </aside>
 
   <!-- Main Content Area -->
-  <main class="flex-1 overflow-y-auto overflow-x-hidden p-10 bg-white">
-    <router-outlet></router-outlet>
+  <main class="flex-1 bg-[#050505] relative min-w-0 overflow-hidden flex flex-col">
+    <!-- Background Glows -->
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-orange-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="relative z-10 w-full flex-1 min-h-0 flex flex-col p-4 md:p-10 pb-24 md:pb-12">
+      <router-outlet></router-outlet>
+    </div>
   </main>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 h-20 glass-container border-t border-white/10 flex items-center justify-around px-6 z-50 backdrop-blur-2xl">
+    <a routerLink="/app/board" 
+       routerLinkActive="text-orange-500" 
+       class="flex flex-col items-center gap-1 font-black uppercase text-[9px] tracking-widest text-white/40 transition-all">
+      <span class="text-lg">📋</span>
+      Tablica
+    </a>
+    <a routerLink="/app/clients" 
+       routerLinkActive="text-orange-500" 
+       class="flex flex-col items-center gap-1 font-black uppercase text-[9px] tracking-widest text-white/40 transition-all">
+      <span class="text-lg">👥</span>
+      Klienci
+    </a>
+    <a routerLink="/app/settings" 
+       routerLinkActive="text-orange-500" 
+       class="flex flex-col items-center gap-1 font-black uppercase text-[9px] tracking-widest text-white/40 transition-all">
+      <span class="text-lg">⚙️</span>
+      Opcje
+    </a>
+    <button (click)="logout()" 
+       class="flex flex-col items-center gap-1 font-black uppercase text-[9px] tracking-widest text-white/40 transition-all">
+      <span class="text-lg">🚪</span>
+      Wyjdź
+    </button>
+  </nav>
 </div>

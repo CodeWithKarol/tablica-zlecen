@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { OrdersService, Order } from '../services/orders.service';
 
 interface ClientEntry {
@@ -15,92 +16,105 @@ interface ClientEntry {
   standalone: true,
   imports: [CommonModule],
   template: `
-<div class="h-full flex flex-col">
+<div class="h-full flex flex-col text-white">
   <!-- Header -->
-  <div class="flex items-end justify-between mb-12 border-b-2 border-black pb-8">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 border-b border-white/10 pb-8 gap-6">
     <div>
-      <h2 class="text-5xl font-black uppercase tracking-tighter">Baza_Klientów</h2>
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-high-contrast">Baza_Klientów</h2>
       <div class="flex items-center gap-4 mt-2 font-mono text-[10px] uppercase">
-        <span class="text-orange-600 font-bold">[STATUS: SYNCED]</span>
-        <span class="text-zinc-400">// ANALIZA_RELACJI: {{ clients().length }} UNIKALNYCH_OBIEKTÓW</span>
+        <span class="text-orange-500 font-bold">[AKTYWNI: {{ clients().length }}]</span>
+        <span class="text-white/40 hidden sm:inline">// HISTORIA_WSZYSTKICH_RELACJI</span>
       </div>
     </div>
 
-    <div class="flex-1 max-w-md mx-12 mb-1">
+    <div class="flex-1 w-full md:max-w-md md:pl-12">
       <div class="relative">
         <input 
           type="text" 
           (input)="searchQuery.set($any($event.target).value)"
-          placeholder="SZUKAJ_KLIENTA..." 
-          class="w-full bg-zinc-50 border border-black px-4 py-3 font-mono text-[11px] uppercase focus:outline-none focus:bg-white focus:border-orange-600 transition-none placeholder:text-zinc-400"
-        />
-        <div class="absolute -top-2 left-3 bg-black text-white text-[8px] px-1.5 py-0.5 font-mono uppercase tracking-widest pointer-events-none">
-          FILTR_WYSZUKIWANIA
-        </div>
+          placeholder="Szukaj po nazwie lub telefonie..." 
+          class="w-full bg-white/5 border border-white/10 px-10 py-4 rounded-xl focus:outline-none focus:ring-1 focus:ring-orange-500 focus:bg-white/10 transition-all text-sm text-white placeholder:text-white/20"
+        >
+        <div class="absolute left-4 top-1/2 -translate-y-1/2 text-white/20">🔍</div>
       </div>
     </div>
   </div>
 
   <!-- Table -->
-  <div class="border border-black bg-white overflow-hidden">
-    <table class="w-full text-left border-collapse">
-      <thead>
-        <tr class="bg-zinc-100 border-b border-black font-mono text-[10px] uppercase tracking-widest">
-          <th class="px-6 py-4 border-r border-black">Klient_ID / Dane</th>
-          <th class="px-6 py-4 border-r border-black">Telefon</th>
-          <th class="px-6 py-4 border-r border-black">Ostatni_Pojazd</th>
-          <th class="px-6 py-4 border-r border-black text-center">Zlecenia</th>
-          <th class="px-6 py-4">Ostatni_Kontakt</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-black">
-        @for (client of filteredClients(); track client.phone + client.name) {
-          <tr class="hover:bg-zinc-50 transition-none group">
-            <td class="px-6 py-6 border-r border-black">
-              <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-black flex items-center justify-center text-white font-mono text-xs border border-black group-hover:bg-orange-600 transition-none">
-                  {{ client.name[0] }}
+  <div class="glass-container overflow-hidden rounded-2xl border-white/10 flex-1 flex flex-col min-w-0">
+    <div class="overflow-x-auto custom-scrollbar overflow-y-auto">
+      <table class="w-full text-left border-collapse min-w-[800px] md:min-w-0">
+        <thead>
+          <tr class="bg-white/5 border-b border-white/10 font-mono text-[10px] uppercase tracking-widest text-white/50">
+            <th class="px-6 py-4 border-r border-white/10">Klient_ID / Dane</th>
+            <th class="px-6 py-4 border-r border-white/10">Telefon</th>
+            <th class="px-6 py-4 border-r border-white/10">Ostatni_Pojazd</th>
+            <th class="px-6 py-4 border-r border-white/10 text-center hidden md:table-cell">Zlecenia</th>
+            <th class="px-6 py-4 pr-12 hidden lg:table-cell">Ostatni_Kontakt</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          @for (client of filteredClients(); track client.phone + client.name) {
+            <tr (click)="openClientDetail(client.phone)" 
+                class="hover:bg-white/5 transition-colors group cursor-pointer">
+              <td class="px-6 py-6 border-r border-white/10">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 bg-white/5 flex items-center justify-center text-orange-500 font-mono text-xs border border-white/10 rounded-lg group-hover:bg-orange-600 group-hover:text-white transition-all">
+                    {{ client.name[0] }}
+                  </div>
+                  <div class="font-black text-sm uppercase tracking-tight text-high-contrast">{{ client.name }}</div>
                 </div>
-                <div class="font-black text-sm uppercase tracking-tight">{{ client.name }}</div>
-              </div>
-            </td>
-            <td class="px-6 py-6 border-r border-black font-mono text-xs font-bold text-zinc-600">
-              {{ client.phone }}
-            </td>
-            <td class="px-6 py-6 border-r border-black">
-              <span class="text-[11px] font-black uppercase bg-zinc-100 px-2 py-1 border border-black/10">
-                {{ client.lastCar }}
-              </span>
-            </td>
-            <td class="px-6 py-6 border-r border-black text-center">
-              <div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-100 border border-black font-mono text-[10px] font-black">
-                {{ client.orderCount }}
-              </div>
-            </td>
-            <td class="px-6 py-6 font-mono text-[10px] text-zinc-500 uppercase">
-              {{ client.lastOrderDate | date:'yyyy-MM-dd HH:mm' }}
-            </td>
-          </tr>
-        } @empty {
-          <tr>
-            <td colspan="5" class="px-6 py-20 text-center">
-              <div class="font-mono text-xs text-zinc-400 uppercase tracking-widest">Brak danych do wyświetlenia</div>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
+              </td>
+              <td class="px-6 py-6 border-r border-white/10 font-mono text-xs font-bold text-medium-contrast">
+                {{ client.phone }}
+              </td>
+              <td class="px-6 py-6 border-r border-white/10">
+                <span class="text-[11px] font-black uppercase bg-white/5 px-2 py-1 border border-white/10 rounded text-medium-contrast">
+                  {{ client.lastCar }}
+                </span>
+              </td>
+              <td class="px-6 py-6 border-r border-white/10 text-center hidden md:table-cell">
+                <div class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/5 border border-white/10 font-mono text-[10px] font-black text-orange-500">
+                  {{ client.orderCount }}
+                </div>
+              </td>
+              <td class="px-6 py-6 font-mono text-[10px] text-white/30 uppercase pr-12 hidden lg:table-cell">
+                {{ client.lastOrderDate | date:'yyyy-MM-dd HH:mm' }}
+              </td>
+            </tr>
+          }
+ @empty {
+            <tr>
+              <td colspan="5" class="px-6 py-20 text-center">
+                <div class="font-mono text-xs text-white/20 uppercase tracking-widest">Brak danych do wyświetlenia</div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 `,
   styles: [`
-    :host { display: block; height: 100%; }
+    :host {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      width: 100%;
+    }
   `],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientListComponent {
   private orderService = inject(OrdersService);
+  private router = inject(Router);
   public searchQuery = signal('');
+
+  public openClientDetail(phone: string) {
+    this.router.navigate(['/app/clients', phone]);
+  }
 
   public clients = computed(() => {
     const orders = this.orderService.orders();

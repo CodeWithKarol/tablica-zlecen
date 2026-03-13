@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --define=SUPABASE_URL=\"'$SUPABASE_URL'\" --define=SUPABASE_KEY=\"'$SUPABASE_ANON_KEY'\"",
+    "start": "node set-env.js dev && ng serve",
+    "build": "node set-env.js prod && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:tablica-zlecen": "node dist/tablica-zlecen/server/server.mjs"
@@ -33,6 +33,7 @@
     "@tailwindcss/postcss": "^4.1.12",
     "@types/express": "^5.0.1",
     "@types/node": "^20.19.37",
+    "dotenv-cli": "^11.0.0",
     "jsdom": "^28.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.8.1",
